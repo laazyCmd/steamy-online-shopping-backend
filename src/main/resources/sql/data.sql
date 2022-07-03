@@ -19,7 +19,7 @@ VALUES
     ('Germany', 19.48);
 
 
-SET @absolute_path = 'F:/Programming/Kotlin/steamy-online-shopping-backend';
+SET @absolute_path = '[PRODUCT_IMAGE_DIRECTORY]';
 
 INSERT INTO products (prod_name, prod_description, prod_image, prod_rating, prod_price, prod_sales, prod_stocks, prod_category, prod_brand, date_created, seller_name, country_origin, shipping_origin, shipping_fee, is_popular)
 VALUES
