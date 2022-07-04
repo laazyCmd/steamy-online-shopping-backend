@@ -9,21 +9,24 @@ import kotlin.jvm.Transient
 class ProductsSummary {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO )
-    val prod_id: Int = 0;
+    @Column( name = "prod_id" )
+    val prodId: Int = 0;
 
-    @Column
-    val prod_name: String = "";
+    @Column( name = "prod_name" )
+    val prodName: String = "";
 
-    @Column
-    var prod_image: String? = null;
+    @Column( name = "prod_image" )
+    var prodImage: String? = null;
 
-    @Column
-    val prod_price: Double = 0.0;
+    @Column( name = "prod_price" )
+    val prodPrice: Double = 0.0;
 
-    @Column
-    val prod_sales: Int = 0;
+    @Column( name = "prod_sales" )
+    val prodSales: Int = 0;
 
-    @Column
-    val is_popular: Boolean = false;
+    @Column( name = "date_created" )
+    val dateCreated: String = "";
+
+    @Column( name = "is_popular" )
+    val isPopular: Boolean = false;
 }

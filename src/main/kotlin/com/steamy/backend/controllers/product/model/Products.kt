@@ -7,51 +7,51 @@ import kotlin.jvm.Transient
 class Products {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO )
-    val prod_id: Int = 0;
+    @Column( name = "prod_id" )
+    val prodId: Int = 0;
 
-    @Column
-    val prod_name: String = "";
+    @Column( name = "prod_name" )
+    val prodName: String = "";
 
-    @Column
-    val prod_description: String = "";
+    @Column( name = "prod_description" )
+    val prodDescription: String = "";
 
     @Transient
-    var prod_image: String? = null;
+    var prodImage: String? = null;
 
-    @Column
-    val prod_rating: Double = 0.0;
+    @Column( name = "prod_rating" )
+    val prodRating: Double = 0.0;
 
-    @Column
-    val prod_price: Double = 0.0;
+    @Column( name = "prod_price" )
+    val prodPrice: Double = 0.0;
 
-    @Column
-    val prod_sales: Int = 0;
+    @Column( name = "prod_sales")
+    val prodSales: Int = 0;
 
-    @Column
-    val prod_stocks: Int = 0;
+    @Column( name = "prod_stocks" )
+    val prodStocks: Int = 0;
 
-    @Column
-    val prod_category: String = "";
+    @Column( name = "prod_category" )
+    val prodCategory: String = "";
 
-    @Column
-    val prod_brand: String = "";
+    @Column( name = "prod_brand" )
+    val prodBrand: String = "";
 
-    @Column
-    val date_created: String = "";
+    @Column( name = "date_created" )
+    val dateCreated: String = "";
 
-    @Column
-    val seller_name: String = "";
+    @Column( name = "seller_name" )
+    val sellerName: String = "";
 
-    @Column
-    val country_origin: String = "";
+    @Column( name = "country_origin" )
+    val countryOrigin: String = "";
 
-    @Column
-    val shipping_origin: String = "";
+    @Column( name = "shipping_origin" )
+    val shippingOrigin: String = "";
 
-    @Column
-    val shipping_fee: Double = 0.0;
+    @Column( name = "shipping_fee" )
+    val shippingFee: Double = 0.0;
 
-    @Column
-    val is_popular: Boolean = false;
+    @Column( name = "is_popular" )
+    val isPopular: Boolean = false;
 }
