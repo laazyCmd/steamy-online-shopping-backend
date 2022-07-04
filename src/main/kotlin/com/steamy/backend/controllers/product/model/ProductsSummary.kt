@@ -24,6 +24,9 @@ class ProductsSummary {
     @Column( name = "prod_sales" )
     val prodSales: Int = 0;
 
+    @Column( name = "prod_category" )
+    val prodCategory: String = "";
+
     @Column( name = "date_created" )
     val dateCreated: String = "";
 
