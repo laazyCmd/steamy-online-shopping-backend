@@ -1,9 +1,9 @@
 package com.steamy.backend.controllers.product
 
+import com.steamy.backend.controllers.product.component.ProductsSummaryComponent
 import com.steamy.backend.controllers.product.model.Products
 import com.steamy.backend.controllers.product.model.ProductsSummary
 import com.steamy.backend.controllers.product.repository.ProductsRepository
-import com.steamy.backend.controllers.product.repository.ProductsSummaryRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
@@ -16,7 +16,7 @@ import java.util.*
 @RequestMapping( "/product" )
 class ProductsController(
     val productsRepository: ProductsRepository,
-    val productsSummaryRepository: ProductsSummaryRepository ) {
+    val productsSummaryComponent: ProductsSummaryComponent ) {
 
     @GetMapping( value = ["/{id}"], produces = ["application/json"] )
     fun getProduct( @PathVariable( "id" ) product_id: Int ): ResponseEntity<Any> {
@@ -29,22 +29,14 @@ class ProductsController(
 
     @GetMapping( value = ["/list"], produces = ["application/json"] )
     fun getProductList( @RequestParam( "name", required = false ) name: String?,
-                        @RequestParam( "category", required = false ) category: String?,
+                        @RequestParam( "price", required = false ) price: Double?,
                         @RequestParam( "sort", required = false ) sort: String?,
                         @RequestParam( "pageNo", required = false, defaultValue = "0" ) page_no: Int,
-                        @RequestParam( "pageSize", required = false, defaultValue = "10" ) page_size: Int ): ResponseEntity<Any> {
-        val product_list: Page<ProductsSummary> =
-            if ( !name.isNullOrBlank() && !category.isNullOrBlank() )
-                this.productsSummaryRepository.findAllByProdNameContainingAndProdCategory( name, category, PageRequest.of( page_no, page_size ) );
-            else if ( !name.isNullOrBlank() )
-                this.productsSummaryRepository.findAllByProdNameContaining( name, PageRequest.of( page_no, page_size ) );
-            else if ( !category.isNullOrBlank() )
-                this.productsSummaryRepository.findAllByProdCategory( category, PageRequest.of( page_no, page_size ) );
-            else this.productsSummaryRepository.findAll( PageRequest.of( page_no, page_size ) );
+                        @RequestParam( "pageSize", required = false, defaultValue = "9" ) page_size: Int ): ResponseEntity<Any> {
 
-        if ( product_list.isEmpty ) return ResponseEntity( "You must specify a product's name, or its category and/or price range", HttpStatus.NOT_FOUND )
-        product_list.forEach { it?.prodImage = Base64.getEncoder().encodeToString( it.prodImage?.toByteArray() ) }
+        val product_list: Page<ProductsSummary> = this.productsSummaryComponent.findAll( name, price, PageRequest.of( page_no, page_size ) );
 
-        return ResponseEntity( product_list, HttpStatus.FOUND )
+        if ( product_list.isEmpty ) return ResponseEntity( "No products found", HttpStatus.NOT_FOUND );
+        return ResponseEntity( product_list, HttpStatus.FOUND );
     }
 }
