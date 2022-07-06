@@ -21,12 +21,11 @@ class ProductsController(
 
     @GetMapping( value = ["/{id}"], produces = ["application/json"] )
     fun getProduct( @PathVariable id: Int ): ResponseEntity<Any> {
-        val product: Products? = this.productsRepository.findByIdOrNull( id )
-        product?.prodImage = Base64.getEncoder().encodeToString( this.productsRepository.getProductImage( id ) )
+        val product: Products? = this.productsRepository.findByIdOrNull( id );
 
         if ( product === null )
             return ResponseEntity( NotFound( "No product has been found with an ID of $id." ), HttpStatus.NOT_FOUND )
-        return ResponseEntity( product, HttpStatus.FOUND )
+        return ResponseEntity( product, HttpStatus.FOUND );
     }
 
     @GetMapping( value = ["/list"], produces = ["application/json"] )

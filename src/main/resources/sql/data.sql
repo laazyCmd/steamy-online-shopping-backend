@@ -1,4 +1,4 @@
-INSERT INTO accounts (acc_name, acc_bio, is_seller)
+INSERT INTO accounts (name, bio, is_seller)
 VALUES
     ('Steamy', 'The longest place name still in use is: Taumatawhakatangihangaoauauotameteat uripukakapikimaungahoronukupokaiwhenua kitanatahu', true),
     ('GatoCetic', 'The strongest muscle in the body is the tongue.', true),
@@ -8,7 +8,7 @@ VALUES
     ('RayHeart', 'Cheese is the most shoplifted food in the world.', true);
 
 
-INSERT INTO countries (country_name, shipping_fee)
+INSERT INTO countries (name, shipping_fee)
 VALUES
     ('Armenia', 3.68),
     ('Australia', 15.5),
@@ -19,9 +19,9 @@ VALUES
     ('Germany', 19.48);
 
 
-SET @absolute_path = '[PRODUCT_IMAGE_DIRECTORY]';
+SET @absolute_path = 'F:/Programming/Kotlin/steamy-online-shopping-backend';
 
-INSERT INTO products (prod_name, prod_description, prod_image, prod_rating, prod_price, prod_sales, prod_stocks, prod_category, prod_brand, date_created, seller_name, country_origin, shipping_origin, shipping_fee, is_popular)
+INSERT INTO products (name, description, image, rating, price, sales, stocks, category, brand, date_created, seller, country_origin, shipping_origin, shipping_fee, is_popular)
 VALUES
 	('Intel Pentium Silver N5000', 'Ah, it is a rock, though. Should beat everything. Gob: There\'s not a lot of logic to it. I thought the two of us could talk man-on-man. In prison, you just have to close your eyes and take it, but here you have to close your eyes and give it. No. I was ashamed to be _seen_ with you. I like being with you.\n\nDouche chill! Turn this skiff around!\n\nWell excuse me for liking the way they frame my junk! There\'s a new daddy in town. A discipline daddy. Heart attack never stopped old big bear. I didn\'t mean who… I meant… her? Pound is tic-tac-toe right? I will pack your sweet pink mouth with so much ice cream you\'ll be the envy of every Jerry and Jane on the block! But I\'m the oldest. The matriarch if you will. It seems like only yesterday you were bursting forth from your mother\'s fertile womb.', LOAD_FILE( CONCAT( @absolute_path, '/images/processors/processor_5.jpg' ) ), 1.83, 276.0, 17700, 4094, 'Processor', 'Intel', '2013-4-14', 'GatoCetic', 'Armenia', 'Germany', 43.44, true),
 

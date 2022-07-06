@@ -7,41 +7,41 @@ import kotlin.jvm.Transient
 class Products {
 
     @Id
-    @Column( name = "prod_id" )
-    val prodId: Int = 0;
+    @Column
+    val id: Int = 0;
 
-    @Column( name = "prod_name" )
-    val prodName: String = "";
+    @Column
+    val name: String = "";
 
-    @Column( name = "prod_description" )
-    val prodDescription: String = "";
+    @Column
+    val description: String = "";
 
     @Transient
-    var prodImage: String? = null;
+    var image: String? = null;
 
-    @Column( name = "prod_rating" )
-    val prodRating: Double = 0.0;
+    @Column
+    val rating: Double = 0.0;
 
-    @Column( name = "prod_price" )
-    val prodPrice: Double = 0.0;
+    @Column
+    val price: Double = 0.0;
 
-    @Column( name = "prod_sales")
-    val prodSales: Int = 0;
+    @Column
+    val sales: Int = 0;
 
-    @Column( name = "prod_stocks" )
-    val prodStocks: Int = 0;
+    @Column
+    val stocks: Int = 0;
 
-    @Column( name = "prod_category" )
-    val prodCategory: String = "";
+    @Column
+    val category: String = "";
 
-    @Column( name = "prod_brand" )
-    val prodBrand: String = "";
+    @Column
+    val brand: String = "";
 
     @Column( name = "date_created" )
     val dateCreated: String = "";
 
-    @Column( name = "seller_name" )
-    val sellerName: String = "";
+    @Column
+    val seller: String = "";
 
     @Column( name = "country_origin" )
     val countryOrigin: String = "";
