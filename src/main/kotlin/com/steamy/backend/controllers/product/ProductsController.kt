@@ -20,27 +20,27 @@ class ProductsController(
     val productsSummaryComponent: ProductsSummaryComponent ) {
 
     @GetMapping( value = ["/{id}"], produces = ["application/json"] )
-    fun getProduct( @PathVariable( "id" ) product_id: Int ): ResponseEntity<Any> {
-        val specific_product: Products? = this.productsRepository.findByIdOrNull( product_id )
-        specific_product?.prodImage = Base64.getEncoder().encodeToString( this.productsRepository.getProductImage( product_id ) )
+    fun getProduct( @PathVariable id: Int ): ResponseEntity<Any> {
+        val product: Products? = this.productsRepository.findByIdOrNull( id )
+        product?.prodImage = Base64.getEncoder().encodeToString( this.productsRepository.getProductImage( id ) )
 
-        if ( specific_product === null )
-            return ResponseEntity( NotFound( "No product has been found with an ID of $product_id." ), HttpStatus.NOT_FOUND )
-        return ResponseEntity( specific_product, HttpStatus.FOUND )
+        if ( product === null )
+            return ResponseEntity( NotFound( "No product has been found with an ID of $id." ), HttpStatus.NOT_FOUND )
+        return ResponseEntity( product, HttpStatus.FOUND )
     }
 
     @GetMapping( value = ["/list"], produces = ["application/json"] )
-    fun getProductList( @RequestParam( "name", required = false ) name: String?,
-                        @RequestParam( "category", required = false ) category: String?,
-                        @RequestParam( "price", required = false ) price: Double?,
-                        @RequestParam( "sort", required = false ) sort: String?,
-                        @RequestParam( "pageNo", required = false, defaultValue = "0" ) page_no: Int,
-                        @RequestParam( "pageSize", required = false, defaultValue = "9" ) page_size: Int ): ResponseEntity<Any> {
+    fun getProductList( @RequestParam( required = false ) name: String?,
+                        @RequestParam( required = false ) category: String?,
+                        @RequestParam( required = false ) price: Double?,
+                        @RequestParam( required = false ) sort: String?,
+                        @RequestParam( required = false, defaultValue = "0" ) pageNo: Int,
+                        @RequestParam( required = false, defaultValue = "9" ) pageSize: Int ): ResponseEntity<Any> {
 
-        val product_list: Page<ProductsSummary> = this.productsSummaryComponent.findAllProducts( name, category, price, PageRequest.of( page_no, page_size ) );
+        val productList: Page<ProductsSummary> = this.productsSummaryComponent.findAllProducts( name, category, price, PageRequest.of( pageNo, pageSize ) );
 
-        if ( product_list.isEmpty )
+        if ( productList.isEmpty )
             return ResponseEntity( NotFound( "No products found with given condition(s)." ), HttpStatus.NOT_FOUND );
-        return ResponseEntity( product_list, HttpStatus.FOUND );
+        return ResponseEntity( productList, HttpStatus.FOUND );
     }
 }
