@@ -4,6 +4,7 @@ import com.steamy.backend.controllers.product.component.ProductsSummaryComponent
 import com.steamy.backend.controllers.product.model.Products
 import com.steamy.backend.controllers.product.model.ProductsSummary
 import com.steamy.backend.controllers.product.repository.ProductsRepository
+import com.steamy.backend.messages.NotFound
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
@@ -29,12 +30,13 @@ class ProductsController(
 
     @GetMapping( value = ["/list"], produces = ["application/json"] )
     fun getProductList( @RequestParam( "name", required = false ) name: String?,
+                        @RequestParam( "category", required = false ) category: String?,
                         @RequestParam( "price", required = false ) price: Double?,
                         @RequestParam( "sort", required = false ) sort: String?,
                         @RequestParam( "pageNo", required = false, defaultValue = "0" ) page_no: Int,
                         @RequestParam( "pageSize", required = false, defaultValue = "9" ) page_size: Int ): ResponseEntity<Any> {
 
-        val product_list: Page<ProductsSummary> = this.productsSummaryComponent.findAll( name, price, PageRequest.of( page_no, page_size ) );
+        val product_list: Page<ProductsSummary> = this.productsSummaryComponent.findAllProducts( name, category, price, PageRequest.of( page_no, page_size ) );
 
         if ( product_list.isEmpty ) return ResponseEntity( "No products found", HttpStatus.NOT_FOUND );
         return ResponseEntity( product_list, HttpStatus.FOUND );

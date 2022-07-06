@@ -6,13 +6,15 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.stereotype.Component
+import java.beans.Expression
 
 @Component
 class ProductsSummaryComponent( val productsSummaryRepository: ProductsSummaryRepository ) {
 
-    fun findAll( name: String?, price: Double?, pageable: Pageable): Page<ProductsSummary> {
+    fun findAllProducts( name: String?, category: String?, price: Double?, pageable: Pageable): Page<ProductsSummary> {
         var specification: Specification<ProductsSummary> = Specification.where( null );
         name?.let { specification = specification.and( byName( name ) ) };
+        category?.let { specification = specification.and( byCategory( category ) ) };
         price?.let { specification = specification.and( byPrice( price ) ) };
 
         return this.productsSummaryRepository.findAll( specification, pageable );
