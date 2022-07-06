@@ -24,7 +24,8 @@ class ProductsController(
         val specific_product: Products? = this.productsRepository.findByIdOrNull( product_id )
         specific_product?.prodImage = Base64.getEncoder().encodeToString( this.productsRepository.getProductImage( product_id ) )
 
-        if ( specific_product === null ) return ResponseEntity( "No product has been found with an ID of $product_id", HttpStatus.NOT_FOUND )
+        if ( specific_product === null )
+            return ResponseEntity( NotFound( "No product has been found with an ID of $product_id." ), HttpStatus.NOT_FOUND )
         return ResponseEntity( specific_product, HttpStatus.FOUND )
     }
 
@@ -38,7 +39,8 @@ class ProductsController(
 
         val product_list: Page<ProductsSummary> = this.productsSummaryComponent.findAllProducts( name, category, price, PageRequest.of( page_no, page_size ) );
 
-        if ( product_list.isEmpty ) return ResponseEntity( "No products found", HttpStatus.NOT_FOUND );
+        if ( product_list.isEmpty )
+            return ResponseEntity( NotFound( "No products found with given condition(s)." ), HttpStatus.NOT_FOUND );
         return ResponseEntity( product_list, HttpStatus.FOUND );
     }
 }
