@@ -16,8 +16,8 @@ class Products {
     @Column
     val description: String = "";
 
-    @Transient
-    var image: String? = null;
+    @Column
+    val image: ByteArray? = null;
 
     @Column
     val rating: Double = 0.0;

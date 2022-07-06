@@ -16,7 +16,7 @@ class ProductsSummary {
     val name: String = "";
 
     @Column
-    var image: String? = null;
+    val image: ByteArray? = null;
 
     @Column
     val price: Double = 0.0;
