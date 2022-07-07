@@ -7,6 +7,8 @@ import com.steamy.backend.controllers.product.repository.ProductsRepository
 import com.steamy.backend.messages.NotFound
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -34,10 +36,17 @@ class ProductsController(
                         @RequestParam( required = false ) price: Double?,
                         @RequestParam( required = false ) popular: Boolean?,
                         @RequestParam( required = false ) sort: String?,
-                        @RequestParam( required = false, defaultValue = "0" ) pageNo: Int,
+                        @RequestParam( required = false, defaultValue = "0" ) page: Int,
                         @RequestParam( required = false, defaultValue = "9" ) pageSize: Int ): ResponseEntity<Any> {
-
-        val productList: Page<ProductsSummary> = this.productsSummaryComponent.findAllProducts( name, category, price, popular, PageRequest.of( pageNo, pageSize ) );
+        val pageable: Pageable =
+            if ( sort.isNullOrEmpty() ) PageRequest.of( page, pageSize );
+            else if ( sort.contains( "," ) ) {
+                val sortDirection = sort.split( "," );
+                if ( sortDirection[1].equals( "asc" ) ) PageRequest.of( page, pageSize, Sort.by( Sort.Direction.ASC, sortDirection[0] ) );
+                else PageRequest.of( page, pageSize, Sort.by( Sort.Direction.DESC, sortDirection[0] ) )
+            }
+            else PageRequest.of( page, pageSize, Sort.by( sort ) );
+        val productList: Page<ProductsSummary> = this.productsSummaryComponent.findAllProducts( name, category, price, popular, pageable );
 
         if ( productList.isEmpty )
             return ResponseEntity( NotFound( "No products found with given condition(s)." ), HttpStatus.NOT_FOUND );
