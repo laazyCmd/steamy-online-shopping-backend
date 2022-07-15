@@ -11,11 +11,12 @@ import java.beans.Expression
 @Component
 class ProductsSummaryComponent( val productsSummaryRepository: ProductsSummaryRepository ) {
 
-    fun findAllProducts( name: String?, category: String?, price: Double?, popular: Boolean?, pageable: Pageable): Page<ProductsSummary> {
+    fun findAllProducts( name: String?, category: String?, price: Double?, shippingFee: Double?, popular: Boolean?, pageable: Pageable): Page<ProductsSummary> {
         var specification: Specification<ProductsSummary> = Specification.where( null );
         name?.let { specification = specification.and( byName( name ) ) };
         category?.let { specification = specification.and( byCategory( category ) ) };
         price?.let { specification = specification.and( byPrice( price ) ) };
+        shippingFee?.let { specification = specification.and( byShippingFee( shippingFee ) ) }
         popular?.let{
             specification =
                 if ( popular ) specification.and( byPopularity() );
@@ -46,6 +47,12 @@ class ProductsSummaryComponent( val productsSummaryRepository: ProductsSummaryRe
     private fun byPopularity(): Specification<ProductsSummary> {
         return Specification<ProductsSummary> { root, _, builder ->
             builder.isTrue( root.get( "isPopular" ) );
+        }
+    }
+
+    private fun byShippingFee( shippingFee: Double ): Specification<ProductsSummary> {
+        return Specification<ProductsSummary> { root, _, builder ->
+            builder.lessThanOrEqualTo( root.get( "shippingFee" ), shippingFee );
         }
     }
 

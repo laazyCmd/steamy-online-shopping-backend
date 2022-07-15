@@ -30,6 +30,9 @@ class ProductsSummary {
     @Column( name = "date_created" )
     val dateCreated: String = "";
 
+    @Column( name = "shipping_fee" )
+    val shippingFee: Double = 0.0;
+
     @Column( name = "is_popular" )
     val isPopular: Boolean = false;
 }

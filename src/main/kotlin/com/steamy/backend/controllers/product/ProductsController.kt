@@ -34,6 +34,7 @@ class ProductsController(
     fun getProductList( @RequestParam( required = false ) name: String?,
                         @RequestParam( required = false ) category: String?,
                         @RequestParam( required = false ) price: Double?,
+                        @RequestParam( required = false ) shippingFee: Double?,
                         @RequestParam( required = false ) popular: Boolean?,
                         @RequestParam( required = false ) sort: String?,
                         @RequestParam( required = false, defaultValue = "0" ) page: Int,
@@ -46,7 +47,7 @@ class ProductsController(
                 else PageRequest.of( page, pageSize, Sort.by( Sort.Direction.DESC, sortDirection[0] ) )
             }
             else PageRequest.of( page, pageSize, Sort.by( sort ) );
-        val productList: Page<ProductsSummary> = this.productsSummaryComponent.findAllProducts( name, category, price, popular, pageable );
+        val productList: Page<ProductsSummary> = this.productsSummaryComponent.findAllProducts( name, category, price, shippingFee, popular, pageable );
 
         if ( productList.isEmpty )
             return ResponseEntity( NotFound( "No products found with given condition(s)." ), HttpStatus.NOT_FOUND );
