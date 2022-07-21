@@ -1,11 +1,12 @@
-INSERT INTO accounts (name, bio, is_seller)
+-- the password is '123456'
+INSERT INTO accounts (name, email_address, password, bio, is_seller)
 VALUES
-    ('Steamy', 'The longest place name still in use is: Taumatawhakatangihangaoauauotameteat uripukakapikimaungahoronukupokaiwhenua kitanatahu', true),
-    ('GatoCetic', 'The strongest muscle in the body is the tongue.', true),
-    ('GnomeBinder', 'In Israel, it is illegal to bring bears to the beach.', true),
-    ('EarMellowGinger', 'Cheese is the most shoplifted food in the world.', false),
-    ('RealJuz', 'Every Pixar movie contains a reference to the Pixar movie that comes after it.', false),
-    ('RayHeart', 'Cheese is the most shoplifted food in the world.', true);
+    ('Steamy', 'steamy@gmail.com', '$2a$10$ez6Oc0LA.RTPIFoS5X7R5eKYGMSvuEyddHXNktg0lJrxBLQgJacVK', 'The longest place name still in use is: Taumatawhakatangihangaoauauotameteat uripukakapikimaungahoronukupokaiwhenua kitanatahu', true),
+    ('GatoCetic', 'gatocetic@gmail.com', '$2a$10$ez6Oc0LA.RTPIFoS5X7R5eKYGMSvuEyddHXNktg0lJrxBLQgJacVK', 'The strongest muscle in the body is the tongue.', true),
+    ('GnomeBinder', 'gnomebinder@gmail', '$2a$10$ez6Oc0LA.RTPIFoS5X7R5eKYGMSvuEyddHXNktg0lJrxBLQgJacVK', 'In Israel, it is illegal to bring bears to the beach.', true),
+    ('EarMellowGinger', 'earmellowginger@gmail.com', '$2a$10$ez6Oc0LA.RTPIFoS5X7R5eKYGMSvuEyddHXNktg0lJrxBLQgJacVK', 'Cheese is the most shoplifted food in the world.', false),
+    ('RealJuz', 'realjuz@gmail.com', '$2a$10$ez6Oc0LA.RTPIFoS5X7R5eKYGMSvuEyddHXNktg0lJrxBLQgJacVK', 'Every Pixar movie contains a reference to the Pixar movie that comes after it.', false),
+    ('RayHeart', 'rayheart@gmail.com', '$2a$10$ez6Oc0LA.RTPIFoS5X7R5eKYGMSvuEyddHXNktg0lJrxBLQgJacVK', 'Cheese is the most shoplifted food in the world.', true);
 
 
 INSERT INTO countries (name, shipping_fee)

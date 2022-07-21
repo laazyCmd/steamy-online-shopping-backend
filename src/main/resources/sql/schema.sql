@@ -1,6 +1,8 @@
 CREATE TABLE IF NOT EXISTS `accounts` (
 	`id` MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(50) NOT NULL COLLATE 'utf8mb3_general_ci',
+	`email_address` VARCHAR(50) NOT NULL COLLATE 'utf8mb3_general_ci',
+	`password` VARCHAR(60) NOT NULL COLLATE 'utf8mb3_general_ci',
 	`bio` VARCHAR(255) NOT NULL COLLATE 'utf8mb3_general_ci',
 	`is_seller` TINYINT(1) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`) USING BTREE,
